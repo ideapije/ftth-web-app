@@ -1,14 +1,23 @@
-FROM php:5.6-apache
+FROM php:7.4-apache
 
-RUN docker-php-ext-install mysql mysqli
+# RUN docker-php-ext-install mysql mysqli
 
 RUN apt-get update -y && apt-get install -y sendmail libpng-dev
 
-RUN apt-get update && \
-    apt-get install -y \
-        zlib1g-dev 
+RUN apt-get update && apt-get install -y \
+      build-essential \
+      libpng-dev \
+      libjpeg62-turbo-dev \
+      libfreetype6-dev \
+      locales \
+      zip \
+      jpegoptim optipng pngquant gifsicle \
+      vim \
+      unzip \
+      git \
+      curl \
+      libzip-dev
 
-RUN docker-php-ext-install mbstring
 
 RUN docker-php-ext-install zip
 

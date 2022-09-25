@@ -30,7 +30,7 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
   reverse-proxy:
     image: nginx:latest
     depends_on: [ web ]
