@@ -1,6 +1,5 @@
 FROM php:7.4-apache
 
-# RUN docker-php-ext-install mysql mysqli
 
 RUN apt-get update -y && apt-get install -y sendmail libpng-dev
 
@@ -24,6 +23,8 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install gd
 
 RUN docker-php-ext-install opcache
+
+RUN docker-php-ext-install mysqli
 
 RUN a2enmod rewrite
 # Install composer 
