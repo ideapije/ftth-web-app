@@ -3,47 +3,34 @@
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header">
-                    <h4>Inisialisasi Penugasan</h4>
+                    <h4>Inisialisasi Transportasi</h4>
                 </div>
                 <div class="card-body">
                     <form action="<?= site_url('transportation/form') ?>" method="get">
                         <div class="row mb-3">
+                            
                             <div class="col-lg-4 col-md-4 col-sm-12">
 
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="type1" name="type" class="custom-control-input">
-                                    <label class="custom-control-label" for="type1">NWC</label>
-                                </div>
-
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="type2" name="type" class="custom-control-input">
+                                    <input type="radio" id="type2" name="type" class="custom-control-input" checked/>
                                     <label class="custom-control-label" for="type2">Least Cost</label>
                                 </div>
 
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="type3" name="type" class="custom-control-input">
-                                    <label class="custom-control-label" for="type3">VAM</label>
-                                </div>
-
-                            </div>
+                            
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="form-group row">
-                                    <label for="inputSource" class="col-sm-4 col-form-label">Jumlah Sumber</label>
+                                    <!-- 1 ODP = 8 Pelanggan -->
+                                    <label for="inputSource" class="col-sm-4 col-form-label">Jumlah ODP</label>
                                     <div class="col-sm-8">
                                         <input type="number" class="form-control" id="inputSource" name="sumber" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputDestination" class="col-sm-4 col-form-label">Jumlah Tujuan</label>
+                                    <label for="inputDestination" class="col-sm-4 col-form-label">Jumlah Pelanggan</label>
                                     <div class="col-sm-8">
                                         <input type="number" class="form-control" id="inputDestination" name="tujuan" />
                                     </div>

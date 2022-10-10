@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-6 offset-3">
+			<div class="col-md-6 offset-md-3 col-sm-12">
 				<div class="row">
 					<div class="col-6">
 						<a href="<?= site_url('dashboard') ?>" class="mw-50 btn btn-light btn-lg btn-block">Mulai</a>

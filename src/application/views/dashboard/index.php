@@ -9,10 +9,10 @@
                     <div class="col-lg-8 col-md-10 col-sm-12">
                         <div class="form-group row">
                             <label for="inputLocation" class="col-sm-4 col-form-label">Lokasi Perancangan</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <input type="search" class="form-control" id="inputLocation" />
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3 search-button">
                                 <a href="#" class="btn btn-info btn-block">Search</a>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="row mb-3">
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>Data Jarak</h4>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>Data Biaya</h4>

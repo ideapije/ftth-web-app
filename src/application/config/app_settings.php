@@ -7,10 +7,6 @@ $config['app_navigation'] = [
         'url' => '/',
         'text' => 'Beranda',
     ],
-    'assignment' => [
-        'url' => '/assignment',
-        'text' => 'Penugasan',
-    ],
     'transportation' => [
         'url' => '/transportation',
         'text' => 'Transportasi',
