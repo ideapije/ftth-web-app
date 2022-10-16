@@ -1,2 +1,3 @@
 .DS_Store
 src/vendor
+logs/nginx/access.log
