@@ -3,10 +3,10 @@
 		<div class="row mb-3">
 			<div class="col text-center">
 				<h1>
-					DECISION SUPPORT SYSTEM (DSS) UNTUK OPTIMALISASI PERANCANGAN JARINGAN
+					OPTIMALISASI JARINGAN FIBER TO THE HOME (FTTH)
 				</h1>
 				<h2>
-					FIBER TO THE HOME (FTTH) BERBASIS MODEL TRANSPORTASI
+					MENGGUNAKAN MODEL TRANSPORTASI BERBASIS WEB
 				</h2>
 			</div>
 		</div>
@@ -14,7 +14,7 @@
 			<div class="col-md-6 offset-md-3 col-sm-12">
 				<div class="row">
 					<div class="col-6">
-						<a href="<?= site_url('dashboard') ?>" class="mw-50 btn btn-light btn-lg btn-block">Mulai</a>
+						<a href="<?= site_url('transportation') ?>" class="mw-50 btn btn-light btn-lg btn-block">Mulai</a>
 					</div>
 					<div class="col-6">
 						<a href="<?= site_url('dashboard/results') ?>" class="mw-50 btn btn-primary btn-lg btn-block">Hasil</a>

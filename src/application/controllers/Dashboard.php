@@ -13,7 +13,7 @@ class Dashboard extends CI_Controller
     public function results()
     {
         $data['ay'] = $this->input->get('ay') ?? 4;
-        $data['ax'] = $this->input->get('ax') ?? 1;
+        $data['ax'] = $this->input->get('ax') ?? 3;
         $this->template->set_title('Results');
         $this->template->view('dashboard/results', $data);
     }
