@@ -49,6 +49,13 @@ class Transportation extends CI_Controller
 
         $this->template->set_title('Result Transportasi');
         $this->template->set_menu('transportation');
+
+        $data['sumber'] = $this->input->get('sumber');
+        $data['tujuan'] = $this->input->get('tujuan');
+        /**
+         * Seeder
+         */
+        $data = $this->loadSeeder($data);
         $this->template->view('transportation/result', $data);
     }
 

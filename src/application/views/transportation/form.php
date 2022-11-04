@@ -1,5 +1,5 @@
 <div class="container p-3">
-    <form action="<?= site_url('transportation/submit') ?>" method="post">
+    <form action="<?= site_url("transportation/submit?sumber=$sumber&tujuan=$tujuan") ?>" method="post">
         <div class="jumbotron jumbotron-fluid mb-3">
             <div class="container">
                 <h3>Input Jalur dan ODP</h3>
