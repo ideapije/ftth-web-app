@@ -92,7 +92,9 @@ class Transportation extends CI_Controller
                 for ($column = 0; $column < count($costs); $column++) {
                     for ($row = 0; $row < count($costs[$column]); $row++) {
                         if ($costs[$column][$row] == $minVal) {
-                            array_push($costIndex, array($column, $row));
+                            if ($pickedCostsArray[$column][$row] == 0) {
+                                array_push($costIndex, array($column, $row));
+                            }
                         }
                     }
                 }
@@ -138,6 +140,7 @@ class Transportation extends CI_Controller
                         $pickedCostsArray[$column][$chosenIndex[1]] = 1;
                     }
                 }
+
             }
 
             return $transportCost;
