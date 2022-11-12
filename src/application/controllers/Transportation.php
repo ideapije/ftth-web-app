@@ -52,6 +52,7 @@ class Transportation extends CI_Controller
 
         $data['sumber'] = $this->input->get('sumber');
         $data['tujuan'] = $this->input->get('tujuan');
+        $data['stored'] = $this->session->userdata('stored');
         /**
          * Seeder
          */
@@ -80,7 +81,7 @@ class Transportation extends CI_Controller
                     $pickedCostsArray[$column][$row] = 0;
                 }
             }
-
+            $stored = [];
             while ($totalSupply > 0 && $totalDemands > 0) {
                 // Find Minimum Cost Available
                 $minVal = 999999999999;
@@ -123,6 +124,11 @@ class Transportation extends CI_Controller
                 if ($demands[$chosenIndex[0]] <= $supplies[$chosenIndex[1]]) {
                     // Demand is Less Than Supplies so Fullfill All
                     $transportCost += $costs[$chosenIndex[0]][$chosenIndex[1]] * $demands[$chosenIndex[0]];
+                    $stored[] = [
+                        'index' => $chosenIndex,
+                        'value' => $costs[$chosenIndex[0]][$chosenIndex[1]],
+                        'left' => $demands[$chosenIndex[0]] 
+                    ];
 
                     $totalSupply -= $demands[$chosenIndex[0]];
                     $totalDemands -= $demands[$chosenIndex[0]];
@@ -136,6 +142,11 @@ class Transportation extends CI_Controller
                 } else {
                     // Demand is More so Take All Remaining Supplies
                     $transportCost += $costs[$chosenIndex[0]][$chosenIndex[1]] * $supplies[$chosenIndex[1]];
+                    $stored[] = [
+                        'index' => $chosenIndex,
+                        'value' => $costs[$chosenIndex[0]][$chosenIndex[1]],
+                        'left' => $supplies[$chosenIndex[1]]
+                    ];
 
                     $totalSupply -= $supplies[$chosenIndex[1]];
                     $totalDemands -= $supplies[$chosenIndex[1]];
@@ -149,7 +160,7 @@ class Transportation extends CI_Controller
                 }
 
             }
-
+            $this->session->set_userdata('stored', $stored);
             return $transportCost;
         }
 
