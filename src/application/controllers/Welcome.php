@@ -47,4 +47,14 @@ class Welcome extends CI_Controller
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');
 	}
+
+	
+    public function test()
+    {
+        $this->config->load('app_seeders');
+        $this->load->helper('modi');
+        $values = $this->config->item('values');
+		$cost_matrix = transpose_to_cost_matrix($values);
+        $this->template->debug_json($cost_matrix);
+    }
 }

@@ -9,7 +9,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Jalur/ODP</th>
+                    <th scope="col">ODC/ODP</th>
                     <?php for ($i = 1; $i <= $ax; $i++) : ?>
                         <th scope="col" colspan="2">ODP <?= $i ?></th>
                     <?php endfor ?>
@@ -19,7 +19,7 @@
             <tbody>
                 <?php for ($i = 1; $i <= $ay; $i++) : ?>
                     <tr>
-                        <td rowspan="2">Jalur <?= $i ?></td>
+                        <td rowspan="2">ODC <?= $i ?></td>
                         <?php for ($k = 1; $k <= $ax; $k++) : ?>
                             <td rowspan="2" bgcolor="<?= ($i === 1 && $k === 1) ? 'blue' : 'transparent' ?>">
                                 <span class="p-3"></span>

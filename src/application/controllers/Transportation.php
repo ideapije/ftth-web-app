@@ -2,6 +2,8 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use GuzzleHttp\Client;
+
 class Transportation extends CI_Controller
 {
     protected $supplies;
@@ -165,5 +167,20 @@ class Transportation extends CI_Controller
         }
 
         return -1;
+    }
+
+    public function submit_modi()
+    {
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'https://d6bab4.deta.dev',
+            // You can set any number of default request options.
+            // 'timeout'  => 2.0,
+        ]);
+
+        $response = $client->request('GET', '/', [
+            'query' => ['token' => 'jessica']
+        ]);
+        echo $response->getBody();
     }
 }

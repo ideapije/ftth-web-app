@@ -11,7 +11,7 @@
                             <div class="col">
 
                                 <div class="form-group row">
-                                    <label for="inputSource" class="col-sm-4 col-form-label">Jumlah Jalur</label>
+                                    <label for="inputSource" class="col-sm-4 col-form-label">Jumlah ODC</label>
                                     <div class="col-sm-8">
                                         <input type="number" class="form-control" id="inputSource" name="sumber" value="<?= $sumber ?>" />
                                     </div>

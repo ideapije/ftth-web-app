@@ -2,14 +2,14 @@
     <div class="jumbotron jumbotron-fluid mb-3">
         <div class="container">
             <h3>Hasil <i>Least Cost</i></h3>
-            <p class="lead">Hasil metode transportasi <i>Least Cost</i> pada input Jalur dan ODP</p>
+            <p class="lead">Hasil metode transportasi <i>Least Cost</i> pada input ODC dan ODP</p>
         </div>
     </div>
     <div class="table-responsive mb-3">
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Jalur/ODP</th>
+                    <th scope="col">ODC/ODP</th>
                     <?php for ($i = 0; $i < $tujuan; $i++) : ?>
                         <th scope="col" colspan="2">ODP <?= $i + 1 ?></th>
                     <?php endfor ?>
@@ -19,7 +19,7 @@
             <tbody>
                 <?php for ($i = 0; $i < $sumber; $i++) : ?>
                     <tr>
-                        <td rowspan="2">Jalur <?= $i + 1 ?></td>
+                        <td rowspan="2">ODC <?= $i + 1 ?></td>
                         <?php for ($j = 0; $j < $tujuan; $j++) : ?>
                             <?php
                             $findLeft = array_filter($stored, function ($item) use ($i, $j) {
