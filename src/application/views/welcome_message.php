@@ -14,10 +14,12 @@
 			<div class="col-md-6 offset-md-3 col-sm-12">
 				<div class="row">
 					<div class="col-6">
-						<a href="<?= site_url('transportation') ?>" class="mw-50 btn btn-light btn-lg btn-block">Mulai</a>
+						<a href="<?= site_url('welcome/tutorial') ?>" class="mw-50 btn btn-light btn-lg btn-block">Panduan</a>
 					</div>
 					<div class="col-6">
-						<a href="<?= site_url('dashboard/results') ?>" class="mw-50 btn btn-primary btn-lg btn-block">Hasil</a>
+						<a href="<?= site_url('transportation') ?>" class="mw-50 btn btn-primary btn-lg btn-block">
+							Mulai
+						</a>
 					</div>
 				</div>
 			</div>

@@ -1,8 +1,8 @@
 <div class="container p-3">
-    <form action="<?= site_url('transportation/submit') ?>" method="post">
+    <form action="<?= site_url("transportation/submit?sumber=$sumber&tujuan=$tujuan") ?>" method="post">
         <div class="jumbotron jumbotron-fluid mb-3">
             <div class="container">
-                <h3>Input Jalur dan ODP</h3>
+                <h3>Input ODC dan ODP</h3>
                 <p class="lead">Masukan nilai dari masing-masing jalur dan ODP</p>
             </div>
         </div>
@@ -10,7 +10,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Jalur/ODP</th>
+                        <th scope="col">ODC/ODP</th>
                         <?php for ($i = 1; $i <= $tujuan ?? 0; $i++) : ?>
                             <th scope="col">ODP <?= $i ?></th>
                         <?php endfor ?>
@@ -20,7 +20,7 @@
                 <tbody>
                     <?php for ($i = 0; $i < $sumber ?? 0; $i++) : ?>
                         <tr>
-                            <td>Jalur <?= $i+1 ?></td>
+                            <td>ODC <?= $i+1 ?></td>
                             <?php for ($j = 0; $j < $tujuan; $j++) : ?>
                                 <td>
                                     <input type="text" name="values[<?= $j ?>][<?= $i ?>]" class="form-control" value="<?= $values[$j][$i] ?? null ?>" />
