@@ -12,3 +12,6 @@ $config['app_navigation'] = [
         'text' => 'Tentang',
     ],
 ];
+$config['app_api_url'] = 'https://d6bab4.deta.dev';
+$config['app_api_query'] = 'jessica';
+$config['app_api_token'] = 'fake-super-secret-token';

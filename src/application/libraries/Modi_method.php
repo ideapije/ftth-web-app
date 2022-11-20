@@ -36,4 +36,27 @@ class Modi_method
         //return $this->bfs_copy;
         return [$u, $v];
     }
+
+    public function convert_values_to_integer($data)
+    {
+        $send = [];
+        foreach($data as $value) {
+            $send[] = intval($value);
+        }
+        return $send;
+    }
+
+    public function transpose_to_cost_matrix($data = [])
+    {
+        $send = [];
+        $len_first_item = count($data[0] ?? []);
+        for ($index = 0; $index < $len_first_item; $index++) {
+            $rows = [];
+            foreach ($data as $item) {
+                $rows[] = intval($item[$index] ?? null);
+            }
+            $send[] = $rows;
+        }
+        return $send;
+    }
 }

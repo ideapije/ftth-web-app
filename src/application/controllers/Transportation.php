@@ -3,6 +3,8 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\ClientException;
 
 class Transportation extends CI_Controller
 {
@@ -46,23 +48,28 @@ class Transportation extends CI_Controller
         $supplies = $this->input->post('supplies');
         $demands = $this->input->post('demands');
         $costs = $this->input->post('values');
-        
-        $data['totalCost'] = $this->solveTransportation($supplies, $demands, $costs);
+        try {
+            $data['supplies'] = $supplies;
+            $data['demands'] = $demands;
+            $data['costs'] = $costs;
 
-        $this->template->set_title('Result Transportasi');
-        $this->template->set_menu('transportation');
+            $data['results'] = $this->least_cost_method($supplies, $demands, $costs);
+            $this->session->set_userdata('least_cost', $data);
 
-        $data['sumber'] = $this->input->get('sumber');
-        $data['tujuan'] = $this->input->get('tujuan');
-        $data['stored'] = $this->session->userdata('stored');
-        /**
-         * Seeder
-         */
-        $data = $this->loadSeeder($data);
-        $this->template->view('transportation/result', $data);
+            $this->modi_process($supplies, $demands, $costs);
+
+            $sumber = $this->input->get('sumber');
+            $tujuan = $this->input->get('tujuan');
+
+            redirect("transportation/results?sumber=$sumber&tujuan=$tujuan");
+        } catch (\Exception $e) {
+            $this->session->set_userdata('errors', [$e->getMessage()]);
+            redirect('transportation/form', 'refresh');
+        }
     }
 
-    protected function solveTransportation($supplies, $demands, $costs) {
+    protected function least_cost_method($supplies, $demands, $costs)
+    {
         $transportCost = 0;
 
         // Check if supplies and demands are Equal
@@ -129,7 +136,7 @@ class Transportation extends CI_Controller
                     $stored[] = [
                         'index' => $chosenIndex,
                         'value' => $costs[$chosenIndex[0]][$chosenIndex[1]],
-                        'left' => $demands[$chosenIndex[0]] 
+                        'left' => $demands[$chosenIndex[0]]
                     ];
 
                     $totalSupply -= $demands[$chosenIndex[0]];
@@ -160,7 +167,6 @@ class Transportation extends CI_Controller
                         $pickedCostsArray[$column][$chosenIndex[1]] = 1;
                     }
                 }
-
             }
             $this->session->set_userdata('stored', $stored);
             return $transportCost;
@@ -169,18 +175,60 @@ class Transportation extends CI_Controller
         return -1;
     }
 
-    public function submit_modi()
+    protected function modi_process($supplies, $demands, $costs)
     {
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://d6bab4.deta.dev',
-            // You can set any number of default request options.
-            // 'timeout'  => 2.0,
-        ]);
+        $this->config->load('app_settings', TRUE);
+        $this->load->library('modi_method');
+        try {
+            $client = new Client([
+                'base_uri' => $this->config->item('app_api_url', 'app_settings'),
+            ]);
 
-        $response = $client->request('GET', '/', [
-            'query' => ['token' => 'jessica']
-        ]);
-        echo $response->getBody();
+            $cost_matrix = $this->modi_method->transpose_to_cost_matrix($costs);
+            $supplies = $this->modi_method->convert_values_to_integer($supplies);
+            $demands = $this->modi_method->convert_values_to_integer($demands);
+
+            $response = $client->request('POST', '/transport/modi-method', [
+                'query' => [
+                    'token' => $this->config->item('app_api_query', 'app_settings'),
+                ],
+                'headers' => [
+                    'x-token' => $this->config->item('app_api_token', 'app_settings'),
+                ],
+                'json' => [
+                    "supply" => $supplies,
+                    "demand" => $demands,
+                    "cost_matrix" => $cost_matrix,
+                ]
+            ]);
+            $data = json_decode($response->getBody());
+            $this->session->set_userdata('modi', $data);
+        } catch (ClientException $e) {
+            $error = Psr7\Message::toString($e->getResponse());
+            $this->session->set_userdata('errors', [$error]);
+        }
+    }
+
+    public function results()
+    {
+        $this->template->set_title('Result Transportasi');
+        $this->template->set_menu('transportation');
+
+        $data['sumber'] = $this->input->get('sumber');
+        $data['tujuan'] = $this->input->get('tujuan');
+        $data['stored'] = $this->session->userdata('stored');
+
+        $least_cost = $this->session->userdata('least_cost');
+        $data['supplies'] = $least_cost['supplies'];
+        $data['demands'] = $least_cost['demands'];
+        $data['costs'] = $least_cost['costs'];
+        $data['bfs_cost'] = $least_cost['results'];
+
+        $data['modi'] = $this->session->userdata('modi');
+        /**
+         * Seeder
+         */
+        $data = $this->loadSeeder($data);
+        $this->template->view('transportation/results', $data);
     }
 }

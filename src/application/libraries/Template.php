@@ -36,7 +36,7 @@ class Template
         $this->props['menu'] = $menu;
     }
 
-    public function debug_json($data)
+    public function json($data)
     {
         $this->ci->output
             ->set_content_type('application/json')

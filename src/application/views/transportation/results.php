@@ -1,10 +1,11 @@
 <div class="container p-3">
     <div class="jumbotron jumbotron-fluid mb-3">
         <div class="container">
-            <h3>Hasil <i>Least Cost</i></h3>
-            <p class="lead">Hasil metode transportasi <i>Least Cost</i> pada input ODC dan ODP</p>
+            <h3>Hasil ODC/ODP</h3>
+            <p class="lead">Hasil metode transportasi <i>Least Cost</i> dan optimasi MODI</p>
         </div>
     </div>
+
     <div class="table-responsive mb-3">
         <table class="table table-bordered">
             <thead>
@@ -30,9 +31,9 @@
                             ?>
                             <td rowspan="2" bgcolor="transparent">
                                 <?php if ($leftAmount) : ?>
-                                    <?= $values[$j][$i] ?? null ?>
+                                    <?= $costs[$j][$i] ?? null ?>
                                 <?php else : ?>
-                                    <s style="color: rgba(0, 0, 0, 0.5);"><?= $values[$j][$i] ?? null ?></s>
+                                    <s style="color: rgba(0, 0, 0, 0.5);"><?= $costs[$j][$i] ?? null ?></s>
                                 <?php endif ?>
                             </td>
                             <td>
@@ -68,12 +69,19 @@
         </table>
     </div>
     <div class="row">
-        <div class="col text-right">
-            <?php if ($totalCost != -1) : ?>
-                <h1>Total Cost : <?= $totalCost ?></h1>
-            <?php else : ?>
-                <h1>Supply And Demand Doesnt Match!</h1>
-            <?php endif; ?>
+        <div class="col-6">
+            <h4>Biaya metode <i>Least Cost</i> :</h4>
+        </div>
+        <div class="col-6  text-right">
+            <h4><strong><?= ($bfs_cost != -1) ? $bfs_cost : 0 ?></strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h4>Biaya metode MODI :</h4>
+        </div>
+        <div class="col-6 text-right">
+            <h4><strong><?= $modi->result ?? 0 ?></strong></h4>
         </div>
     </div>
 </div>
