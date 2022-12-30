@@ -6,7 +6,7 @@
                     <h4>Input Data Jaringan FTTH</h4>
                 </div>
                 <div class="card-body">
-                    <form action="<?= site_url('transportation/form') ?>" method="get">
+                    <form action="<?= site_url('resolver/form') ?>" method="get">
                         <div class="row">
                             <div class="col">
 
