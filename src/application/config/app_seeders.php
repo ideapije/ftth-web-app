@@ -1,13 +1,13 @@
 <?php
 
-$config['supplies'] = [40, 60, 50];
-$config['total'] = 150; // jumlah dari supplies
+$config['supplies'] = [96, 96, 96, 96];
+$config['total'] = 384; // jumlah dari supplies
 
-$config['demands'] = [20, 30, 50, 50];
+$config['demands'] = [72, 144, 48, 120];
 
 $config['values'] = [
-    [4, 6, 5], // D1
-    [6, 8, 7], // D2
-    [8, 6, 6], // D3
-    [8, 7, 8], // d4
+    [1957, 1707, 1830, 1407], // D1
+    [1217, 1419, 1234, 1144], // D2
+    [1434, 1323, 1604, 1208], // D3
+    [1186, 1132, 1149, 1358], // d4
 ];

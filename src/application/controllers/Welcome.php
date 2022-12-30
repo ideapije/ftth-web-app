@@ -48,15 +48,15 @@ class Welcome extends CI_Controller
 		$writer->save('php://output');
 	}
 
-	
-    public function test()
-    {
-        $this->config->load('app_seeders');
-        $this->load->helper('modi');
-        $values = $this->config->item('values');
+
+	public function test()
+	{
+		$this->config->load('app_seeders');
+		$this->load->helper('modi');
+		$values = $this->config->item('values');
 		$cost_matrix = transpose_to_cost_matrix($values);
-        $this->template->json($cost_matrix);
-    }
+		$this->template->json($cost_matrix);
+	}
 
 	public function tutorial($page = null)
 	{

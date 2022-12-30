@@ -15,7 +15,7 @@ class Transportation extends CI_Controller
     {
         $this->template->set_title('Model Transportasi');
         $this->template->set_menu('transportation');
-        $data['sumber'] = 3;
+        $data['sumber'] = 4;
         $data['tujuan'] = 4;
         $this->template->view('transportation/index', $data);
     }
