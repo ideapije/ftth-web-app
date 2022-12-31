@@ -35,6 +35,9 @@ class Resolver extends CI_Controller
 
     public function submit()
     {
+        $sumber = $this->input->get('sumber');
+        $tujuan = $this->input->get('tujuan');
+
         $this->form_validation->set_rules('supply[]', 'Supply', 'trim|numeric');
         $this->form_validation->set_rules('demand[]', 'Demand', 'trim|numeric');
 
@@ -63,7 +66,7 @@ class Resolver extends CI_Controller
             $this->session->set_userdata('ip_address', $ip_address);
             $this->least_cost_request($cost_matrix, $supply, $demand, $userID);
 
-            redirect('resolver/results', 'refresh');
+            redirect("resolver/results?sumber=$sumber&tujuan=$tujuan", 'refresh');
         }
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -145,8 +148,18 @@ class Resolver extends CI_Controller
     public function results()
     {
         $this->load->model('transport_model');
-        $ip_address = $this->session->userdata('ip_address');
-        $data       = $this->transport_model->get_by_ip_address($ip_address);
-        $this->template->json($data);
+        $ip_address     = $this->session->userdata('ip_address');
+        $solution       = $this->transport_model->get_by_ip_address($ip_address);
+
+        $data['costs']      = json_decode($solution->costs ?? []);
+        $data['supply']     = json_decode($solution->supply ?? []);
+        $data['demand']     = json_decode($solution->demand ?? []);
+        $data['results_lc'] = json_decode($solution->results_least_cost ?? []);
+        $data['least_cost'] = $solution->least_cost ?? NULL;
+        $data['sumber']     = $this->input->get('sumber');
+        $data['tujuan']     = $this->input->get('tujuan');
+        
+        $this->template->set_title('Results');
+        $this->template->view('resolver/results', $data);
     }
 }
