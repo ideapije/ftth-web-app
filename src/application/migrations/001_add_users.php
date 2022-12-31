@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Migration_Add_parameters extends CI_Migration
+class Migration_Add_Users extends CI_Migration
 {
 
     public function up()
@@ -10,26 +10,27 @@ class Migration_Add_parameters extends CI_Migration
         $this->dbforge->add_field([
             'id' => [
                 'type' => 'INT',
-                'constraint' => 5,
+                'constraint' => 11,
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
-            'parameter' => [
+            'ip' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
+                'constraint' => 55,
             ],
-            'category' => [
+            'username' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
-                'NULL' => TRUE
+                'constraint' => 15,
+                'null' => TRUE,
             ],
+            'created_at datetime default current_timestamp'
         ]);
         $this->dbforge->add_key('id', TRUE);
-        $this->dbforge->create_table('parameters');
+        $this->dbforge->create_table('users');
     }
 
     public function down()
     {
-        $this->dbforge->drop_table('parameters');
+        $this->dbforge->drop_table('users');
     }
 }

@@ -1,22 +1,17 @@
 <?php
 
-$config['app_name'] = 'FTTH';
+$config['app_name'] = 'Optimalisasi FTTH';
 $config['app_description'] = 'DECISION SUPPORT SYSTEM (DSS) UNTUK OPTIMALISASI PERANCANGAN JARINGAN FIBER TO THE HOME (FTTH) BERBASIS MODEL TRANSPORTASI';
 $config['app_navigation'] = [
     'home' => [
         'url' => '/',
         'text' => 'Beranda',
     ],
-    'assignment' => [
-        'url' => '/assignment',
-        'text' => 'Penugasan',
-    ],
-    'transportation' => [
-        'url' => '/transportation',
-        'text' => 'Transportasi',
-    ],
     'about' => [
         'url' => '/about',
         'text' => 'Tentang',
     ],
 ];
+$config['app_api_url'] = 'https://d6bab4.deta.dev';
+$config['app_api_query'] = 'jessica';
+$config['app_api_token'] = 'fake-super-secret-token';

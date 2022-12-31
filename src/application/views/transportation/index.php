@@ -3,66 +3,34 @@
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header">
-                    <h4>Inisialisasi Penugasan</h4>
+                    <h4>Input Data Jaringan FTTH</h4>
                 </div>
                 <div class="card-body">
-                    <form action="<?= site_url('transportation/form') ?>" method="get">
-                        <div class="row mb-3">
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="type1" name="type" class="custom-control-input">
-                                    <label class="custom-control-label" for="type1">NWC</label>
-                                </div>
-
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="type2" name="type" class="custom-control-input">
-                                    <label class="custom-control-label" for="type2">Least Cost</label>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="type3" name="type" class="custom-control-input">
-                                    <label class="custom-control-label" for="type3">VAM</label>
-                                </div>
-
-                            </div>
-                        </div>
+                    <form action="<?= site_url('resolver/form') ?>" method="get">
                         <div class="row">
                             <div class="col">
+
                                 <div class="form-group row">
-                                    <label for="inputSource" class="col-sm-4 col-form-label">Jumlah Sumber</label>
+                                    <label for="inputSource" class="col-sm-4 col-form-label">Jumlah ODC</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" id="inputSource" name="sumber" />
+                                        <input type="number" class="form-control" id="inputSource" name="sumber" value="<?= $sumber ?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputDestination" class="col-sm-4 col-form-label">Jumlah Tujuan</label>
+                                    <label for="inputDestination" class="col-sm-4 col-form-label">Jumlah ODP</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" id="inputDestination" name="tujuan" />
+                                        <input type="number" class="form-control" id="inputDestination" name="tujuan" value="<?= $tujuan ?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="" class="col-sm-4 col-form-label">Metode Optimasi</label>
                                     <div class="col-sm-8">
                                         <div class="row">
-                                            <div class="col-6">
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="method_optimize1" name="method_optimize" class="custom-control-input">
-                                                    <label class="custom-control-label" for="method_optimize1">Stepping Stone</label>
-                                                </div>
+                                            <div class="col-12">
+                                                <p>Metode <i>Least Cost</i></p>
                                             </div>
-                                            <div class="col-6">
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="method_optimize2" name="method_optimize" class="custom-control-input">
-                                                    <label class="custom-control-label" for="method_optimize2">MODI</label>
-                                                </div>
+                                            <div class="col-12">
+                                                <p>Metode <i>Optimal Modified Distribution</i></p>
                                             </div>
                                         </div>
                                     </div>
