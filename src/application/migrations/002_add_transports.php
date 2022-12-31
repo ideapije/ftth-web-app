@@ -28,6 +28,14 @@ class Migration_Add_Transports extends CI_Migration
             'costs' => [
                 'type' => 'TEXT',
             ],
+            'results_least_cost' => [
+                'type' => 'TEXT',
+                'null' => TRUE,
+            ],
+            'results_modi' => [
+                'type' => 'TEXT',
+                'null' => TRUE,
+            ],
             'least_cost' => [
                 'type' => 'VARCHAR',
                 'constraint' => 55,

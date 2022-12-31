@@ -15,6 +15,7 @@ class Resolver extends CI_Controller
         $this->config->load('app_settings', TRUE);
         $this->load->library('modi_method');
         $this->load->helper('array');
+        $this->load->helper('string');
     }
 
     public function form()
@@ -38,26 +39,37 @@ class Resolver extends CI_Controller
         $this->form_validation->set_rules('demand[]', 'Demand', 'trim|numeric');
 
         if ($this->form_validation->run()) {
-            $cost_matrix = $this->input->post("costs");
+            $costs  = $this->input->post("costs");
             $supply = $this->input->post("supply");
             $demand = $this->input->post("demand");
+
+            $supply         = array_values_as_integer($supply);
+            $demand         = array_values_as_integer($demand);
+            $cost_matrix    = set_costs_matrix($costs);
+
+            /**
+             * Save IP address as an user
+             */
+            $this->load->model('user_model');
+
+            $ip_address         = $this->input->ip_address();
+            $data['ip']         = $ip_address;
+            $data['username']   = random_string('alnum', 8);
+            $userID             = $this->user_model->first_or_create($ip_address, $data);
 
             /**
              * Call to first method: Least cost
              */
-            $this->least_cost_request($cost_matrix, $supply, $demand);
+            $this->session->set_userdata('ip_address', $ip_address);
+            $this->least_cost_request($cost_matrix, $supply, $demand, $userID);
 
             redirect('resolver/results', 'refresh');
         }
         redirect($_SERVER['HTTP_REFERER']);
     }
 
-    protected function least_cost_request($costs, $supply, $demand)
+    protected function least_cost_request($cost_matrix, $supply, $demand, $userID)
     {
-        $supply         = array_values_as_integer($supply);
-        $demand         = array_values_as_integer($demand);
-        $cost_matrix    = set_costs_matrix($costs);
-
         try {
             $client = new Client([
                 'base_uri' => $this->config->item('app_api_url', 'app_settings'),
@@ -75,20 +87,35 @@ class Resolver extends CI_Controller
                     "cost_matrix" => $cost_matrix,
                 ]
             ]);
-            $data = json_decode($response->getBody());
-            $this->session->set_userdata('least_cost', $data);
+            $body                       = json_decode($response->getBody());
+
+            $data['user_id']             = $userID;
+            $data['supply']              = json_encode($supply);
+            $data['demand']              = json_encode($demand);
+            $data['costs']               = json_encode($cost_matrix);
+            $data['results_least_cost']  = json_encode($body->plan ?? []);
+            $data['least_cost']          = $body->total_cost ?? 0;
+
+            $this->load->model('transport_model');
+            /**
+             * Save current results of transportation problem
+             */
+
+            $transport = $this->transport_model->get_by_user_id($userID);
+
+            if ($transport->id ?? false) {
+                $this->transport_model->update($transport->id, $data);
+            } else {
+                $this->transport_model->insert($data);
+            }
         } catch (ClientException $e) {
             $error = Psr7\Message::toString($e->getResponse());
             $this->session->set_userdata('errors', [$error]);
         }
     }
 
-    protected function optimize_modi_request($costs, $supply, $demand)
+    protected function optimize_modi_request($cost_matrix, $supply, $demand)
     {
-        $supply         = array_values_as_integer($supply);
-        $demand         = array_values_as_integer($demand);
-        $cost_matrix    = set_costs_matrix($costs);
-
         try {
             $client = new Client([
                 'base_uri' => $this->config->item('app_api_url', 'app_settings'),
@@ -117,7 +144,9 @@ class Resolver extends CI_Controller
 
     public function results()
     {
-        $data['least_cost'] = $this->session->userdata('least_cost');
+        $this->load->model('transport_model');
+        $ip_address = $this->session->userdata('ip_address');
+        $data       = $this->transport_model->get_by_ip_address($ip_address);
         $this->template->json($data);
     }
 }
