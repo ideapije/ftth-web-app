@@ -27,3 +27,7 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./src/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/src/system/**
