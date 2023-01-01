@@ -16,12 +16,12 @@
                 <tr>
                     <td rowspan="2">ODC <?= $i + 1 ?></td>
                     <?php for ($j = 0; $j < $tujuan; $j++) : ?>
-                        <?php $result_value = $results_lc[$j][$i] ?? 0; ?>
+                        <?php $result_value = $results_lc[$i][$j] ?? null; ?>
                         <td rowspan="2" bgcolor="transparent">
-                            <?= $costs[$j][$i] ?? null ?>
+                            <?= $costs[$i][$j] ?? null ?>
                         </td>
                         <td bgcolor="<?= $result_value ? 'cyan' : 'transparent'  ?>">
-                            <?= $results_lc[$j][$i] ?? null ?>
+                            <?= $result_value ?>
                         </td>
                     <?php endfor ?>
                     <td rowspan="2" bgcolor="transparent">

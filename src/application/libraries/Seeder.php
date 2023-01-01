@@ -17,7 +17,7 @@ class Seeder
         $data['supplies']   = $this->ci->config->item('supplies');
         $data['demands']    = $this->ci->config->item('demands');
         $data['total']      = $this->ci->config->item('total');
-        $data['costs']      = $this->ci->config->item('values');
+        $data['costs']      = $this->ci->config->item('costs');
         return $data;
     }
 }

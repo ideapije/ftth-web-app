@@ -102,6 +102,8 @@ class Resolver extends CI_Controller
             $data['costs']               = json_encode($cost_matrix);
             $data['results_least_cost']  = json_encode($body->plan ?? []);
             $data['least_cost']          = $body->total_cost ?? 0;
+            $data['modi']                = NULL;
+            $data['results_modi']        = NULL;
 
             /**
              * Save current results of transportation problem

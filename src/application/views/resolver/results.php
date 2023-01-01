@@ -3,7 +3,7 @@
     <div class="jumbotron jumbotron-fluid mb-3">
         <div class="container">
             <h3>Hasil Optimasi</h3>
-            <p class="lead">Menyelesaikan masalah transportasi dengan 2 metode: <i>Least Cost</i> dan optimasi MODI</p>
+            <p class="lead">Menyelesaikan masalah transportasi dengan 2 metode: <i>Least Cost</i> dan optimasi VAM-MODI</p>
         </div>
     </div>
     <!-- start showing results -->
