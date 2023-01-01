@@ -32,6 +32,12 @@ class Transport_model extends CI_Model
         return $this->db->get(self::TABLE_NAME)->row();
     }
 
+    public function get_by_id($ID)
+    {
+        $this->db->where('id', $ID);
+        return $this->db->get(self::TABLE_NAME)->row();
+    }
+
     public function update($id, $data)
     {
         $data['updated_at'] = date('Y-m-d H:i:s');

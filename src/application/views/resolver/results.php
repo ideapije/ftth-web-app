@@ -1,84 +1,37 @@
 <div class="container p-3">
+
     <div class="jumbotron jumbotron-fluid mb-3">
         <div class="container">
-            <h3>Hasil ODC/ODP</h3>
-            <p class="lead">Hasil metode transportasi <i>Least Cost</i> dan optimasi MODI</p>
+            <h3>Hasil Optimasi</h3>
+            <p class="lead">Menyelesaikan masalah transportasi dengan 2 metode: <i>Least Cost</i> dan optimasi MODI</p>
         </div>
     </div>
+    <!-- start showing results -->
 
-    <div class="table-responsive mb-3">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">ODC/ODP</th>
-                    <?php for ($i = 0; $i < $tujuan; $i++) : ?>
-                        <th scope="col" colspan="2">
-                            ODP <?= $i + 1 ?>
-                        </th>
-                    <?php endfor ?>
-                    <th scope="col">Kapasitas</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php for ($i = 0; $i < $sumber; $i++) : ?>
-                    <tr>
-                        <td rowspan="2">ODC <?= $i + 1 ?></td>
-                        <?php for ($j = 0; $j < $tujuan; $j++) : ?>
-                            <?php
-                            $result_value = $results_lc[$j][$i] ?? 0;
-                            ?>
-                            <td rowspan="2" bgcolor="transparent">
-                                <?= $costs[$j][$i] ?? null ?>
-                            </td>
-                            <td bgcolor="<?= $result_value ? 'cyan' : 'transparent'  ?>">
-                                <?= $results_lc[$j][$i] ?? null ?>
-                            </td>
-                        <?php endfor ?>
-                        <td rowspan="2" bgcolor="transparent">
-                            <?= $supply[$i] ?? 0 ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <?php for ($j = 0; $j < $tujuan; $j++) : ?>
-                            <td></td>
-                        <?php endfor ?>
-                    </tr>
-                <?php endfor ?>
-                <tr>
-                    <td>
-                        Demand
-                    </td>
-                    <?php for ($i = 0; $i < $tujuan; $i++) : ?>
-                        <td scope="col" colspan="2">
+    <?php if ($least_cost) : ?>
+        <h3>Hasil <i>Least cost</i></h3>
+        <?php include VIEWPATH . "resolver/table/least_cost.php"; ?>
+    <?php endif ?>
 
-                            <?= $demand[$i] ?? null ?>
-                        </td>
-                    <?php endfor ?>
-                    <td>
-                        <?= $total ?? null ?>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <h4>Biaya metode <i>Least Cost</i> :</h4>
+    <hr />
+
+    <?php if ($modi) : ?>
+        <h3>Hasil optimasi <i>VAM-MODI</i></h3>
+        <?php include VIEWPATH . "resolver/table/vam_modi.php"; ?>
+    <?php endif ?>
+
+    <?php if (!$modi) : ?>
+        <div class="row">
+            <div class="col-12 text-right">
+                <form action="<?= site_url("resolver/optimize?sumber=$sumber&tujuan=$tujuan") ?>" method="post">
+                    <input type="hidden" name="solution_id" value="<?= $solution_id ?>" />
+                    <button type="submit" class="btn btn-lg btn-primary">
+                        Optimasi MODI
+                    </button>
+                </form>
+            </div>
         </div>
-        <div class="col-6  text-right">
-            <h4><strong><?= number_format($least_cost ?? 0) ?></strong></h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <h4>Biaya metode MODI :</h4>
-        </div>
-        <div class="col-6 text-right">
-            <h4>
-                <strong>
-                    <!-- TODO -->
-                </strong>
-            </h4>
-        </div>
-    </div>
+    <?php endif ?>
+
+    <!-- end showing results -->
 </div>

@@ -12,7 +12,7 @@ class Seeder
         $this->ci->config->load('app_seeders');
     }
 
-    public function transportation($data = [])
+    public function transportation()
     {
         $data['supplies']   = $this->ci->config->item('supplies');
         $data['demands']    = $this->ci->config->item('demands');
