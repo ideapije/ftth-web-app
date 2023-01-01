@@ -3,7 +3,7 @@
     <div class="jumbotron jumbotron-fluid mb-3">
         <div class="container">
             <h3>Hasil Optimasi</h3>
-            <p class="lead">Menyelesaikan masalah transportasi dengan 2 metode: <i>Least Cost</i> dan optimasi VAM-MODI</p>
+            <p class="lead">Menyelesaikan masalah transportasi dengan 2 metode: <i>Least Cost</i> dan optimasi MODI</p>
         </div>
     </div>
     <!-- start showing results -->
@@ -16,7 +16,7 @@
     <hr />
 
     <?php if ($modi) : ?>
-        <h3>Hasil optimasi <i>VAM-MODI</i></h3>
+        <h3>Hasil optimasi <i>MODI</i></h3>
         <?php include VIEWPATH . "resolver/table/vam_modi.php"; ?>
     <?php endif ?>
 
