@@ -17,10 +17,10 @@
                     <td rowspan="2">ODC <?= $i + 1 ?></td>
                     <?php for ($j = 0; $j < $tujuan; $j++) : ?>
                         <?php
-                            $cost       = $costs[$j][$i] ?? 0;
+                            $cost       = $costs[$i][$j] ?? 0;
                             $findItems  = array_filter($results_modi, function ($array) use ($i, $j) {
                                 [$x, $y] = $array[2];
-                                return $x === $j && $i === $y;
+                                return $x === $i && $y === $j;
                             });
                             $store      = array_shift($findItems);
                         ?>
