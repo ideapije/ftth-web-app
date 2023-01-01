@@ -190,7 +190,7 @@ class Resolver extends CI_Controller
         $data['results_lc']     = json_decode($solution->results_least_cost ?? []);
         $data['least_cost']     = $solution->least_cost ?? NULL;
 
-        $data['results_modi']   = json_decode($solution->results_modi ?? []);
+        $data['results_modi']   = $solution->results_modi ? json_decode($solution->results_modi) : [];
         $data['modi']           = $solution->modi ?? NULL;
 
         $data['solution_id']    = $solution->id ?? NULL;
