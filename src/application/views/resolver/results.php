@@ -16,7 +16,7 @@
     <hr />
 
     <?php if ($modi) : ?>
-        <h3>Hasil optimasi <i>VAM-MODI</i></h3>
+        <h3>Hasil optimasi <i>MODI</i></h3>
         <?php include VIEWPATH . "resolver/table/vam_modi.php"; ?>
     <?php endif ?>
 

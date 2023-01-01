@@ -27,7 +27,7 @@
                             <td>ODC <?= $i + 1 ?></td>
                             <?php for ($j = 0; $j < $amount_demand; $j++) : ?>
                                 <td>
-                                    <input type="text" name="costs[<?= $i ?>][<?= $j ?>]" value="<?= $costs[$j][$i] ?? null ?>" />
+                                    <input type="text" name="costs[<?= $i ?>][<?= $j ?>]" value="<?= $costs[$i][$j] ?? null ?>" />
                                 </td>
                             <?php endfor ?>
                             <td>
