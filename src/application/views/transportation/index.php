@@ -22,6 +22,16 @@
                                         <input type="number" class="form-control" id="inputDestination" name="tujuan" value="<?= $tujuan ?>" />
                                     </div>
                                 </div>
+                                <div class="form-group row">                            
+                                    <div class="col-sm-8 offset-4 d-flex align-items-center">
+                                        <span style="height: 22px;">
+                                            <input type="checkbox" class="form-control" id="checkSeeder" name="seeder" value="1" checked/>
+                                        </span>
+                                        <span class="p-2">
+                                            <label for="checkSeeder">Centang untuk menggunakan data sampel</label>
+                                        </span>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label for="" class="col-sm-4 col-form-label">Metode Optimasi</label>
                                     <div class="col-sm-8">

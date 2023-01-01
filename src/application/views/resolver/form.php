@@ -41,11 +41,11 @@
                         </td>
                         <?php for ($k = 0; $k < $amount_demand; $k++) : ?>
                             <td>
-                                <input type="text" name="demand[]" class="form-control" value="<?= $demands[$k] ?? null ?>" />
+                                <input type="text" name="demand[]" value="<?= $demands[$k] ?? null ?>" />
                             </td>
                         <?php endfor ?>
                         <td>
-                            <input type="text" name="total" class="form-control" value="<?= $total ?? null ?>" />
+                            <input type="text" name="total" value="<?= $total ?? null ?>" />
                         </td>
                     </tr>
                 </tbody>

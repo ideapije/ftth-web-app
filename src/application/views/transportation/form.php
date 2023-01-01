@@ -27,7 +27,7 @@
                                 </td>
                             <?php endfor ?>
                             <td>
-                                <input type="text" name="supplies[]" class="form-control" value="<?= $supplies[$i] ?? 0 ?>" />
+                                <input type="text" name="supplies[]" class="form-control" value="<?= $supplies[$i] ?? null ?>" />
                             </td>
                         </tr>
                     <?php endfor ?>
