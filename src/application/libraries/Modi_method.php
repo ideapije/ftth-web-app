@@ -3,14 +3,14 @@
 class Modi_method
 {
     /**
-     * The following MODI steps to solve transportation problem : 
-     * 1. Begin with an initial feasible solution for the transportation problem. This can be found using the northwest corner rule, minimum cost method, or Vogel's approximation method.
-     * 2. Calculate the "opportunity costs" for each non-basic variable (i.e., each unused transportation route). This is done by adding the supply and demand values for that route to the transportation cost for that route.
-     * 3. Find the non-basic variable (unused transportation route) with the smallest opportunity cost. This is the route that will be used to modify the initial solution.
-     * 4. Check whether the demand at the destination of the chosen route is greater than or less than the supply at the source.
-     *    - If the demand is greater than the supply, allocate the full supply to the chosen route and reduce the demand at the destination accordingly.
-     *    - If the demand is less than the supply, allocate the full demand to the chosen route and reduce the supply at the source accordingly.
-     * 5. Repeat this process until no further improvements can be made. At this point, the solution is optimal.
+     * Langkah-langkah MODI berikut untuk menyelesaikan masalah transportasi : 
+     * 1. Mulailah dengan solusi awal yang layak untuk masalah transportasi. Ini dapat ditemukan menggunakan aturan sudut barat laut, metode biaya minimum, atau metode perkiraan Vogel.
+     * 2. Hitung "biaya peluang" untuk setiap variabel non-dasar (yaitu, setiap rute transportasi yang tidak digunakan). Ini dilakukan dengan menambahkan nilai penawaran dan permintaan untuk rute tersebut ke biaya transportasi untuk rute tersebut.
+     * 3. Temukan variabel non-dasar (rute transportasi yang tidak digunakan) dengan biaya peluang terkecil. Ini adalah rute yang akan digunakan untuk memodifikasi solusi awal.
+     * 4. Periksa apakah permintaan di tujuan rute yang dipilih lebih besar dari atau kurang dari pasokan di sumbernya.
+     *    - Jika permintaan lebih besar dari penawaran, alokasikan pasokan penuh ke rute yang dipilih dan kurangi permintaan di tujuan yang sesuai.
+     *    - Jika permintaan kurang dari penawaran, alokasikan permintaan penuh ke rute yang dipilih dan kurangi pasokan di sumber yang sesuai.
+     * 5. Ulangi proses ini sampai tidak ada perbaikan lebih lanjut yang dapat dilakukan. Pada titik ini, solusinya optimal.
      */
     public $bfs_copy = [];
 

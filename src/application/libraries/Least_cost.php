@@ -3,27 +3,27 @@
 class Least_cost
 {
     /**
-     * Here is a general outline of how you could implement the least cost method in PHP:
-     * 1. Begin by representing the transportation problem as a matrix, with the rows representing the sources and the columns representing the destinations. The cells of the matrix should contain the cost of shipping one unit of goods from the corresponding source to the corresponding destination.
-     * 2. Initialize the solution matrix to all zeros. This matrix will store the final shipping amounts for each source-destination pair.
-     * 3. Calculate the net supply and net demand at each location. The net supply is the total amount of goods available at each source, and the net demand is the total amount of goods needed at each destination.
-     * 4. While there is still unbalanced supply or demand:
-     *     4.1 Find the location with the largest excess supply or demand (whichever is greater in magnitude).
-     *     4.2 If the excess supply is greater, find the location with the smallest cost for shipping to a location with excess demand.
-     *     4.3 If the excess demand is greater, find the location with the smallest cost for shipping from a location with excess supply.
-     *     4.4 Ship the maximum amount possible from the excess supply location to the excess demand location, and update the solution matrix and the net supply and demand values accordingly.
-     * 5. When there is no more unbalanced supply or demand, the solution matrix contains the optimal shipping amounts for the unbalanced transportation problem.
-     */
+     * Berikut adalah implementasi model least cost pada perintah skrip coding PHP:
+     * 1. Sel-sel matriks harus berisi biaya distribusi per core dari sumber yang sesuai menuju ke tujuan yang sesuai.
+     * 2. Inisialisasi sel biaya distribusi ke semua nol. Matriks ini akan menyimpan jumlah distribusi akhir untuk setiap pasangan sumber ke tujuan.
+     * 3. Hitung total supply dan total demand untuk memulai alokasi. Supply adalah jumlah total core yang tersedia di setiap sumber dan demand adalah jumlah total core yang dibutuhkan di setiap tujuan.
+     * 4. Mencari biaya terendah dari seluruh biaya distribusi yang ada. Jika terdapat jumlah dari setiap supply dan demand tidak seimbang, maka:
+     *  4.1 Temukan sel yang memiliki jumlah supply yang lebih banyak atau demand lebih banyak 
+     *  4.2 Jika supply lebih banyak, temukan sel dengan biaya distribusi terkecil ke tujuan yang demandnya belum terpenuhi.
+     *  4.3 Jika demand lebih besar, temukan sel dengan biaya distribusi terkecil dari sel dengan supply yang masih ada.
+     *  4.4 Kirim jumlah maksimum yang mungkin dari sel kelebihan supply ke lokasi demand berlebih, dan perbarui matriks solusi dan nilai penawaran dan permintaan bersih yang sesuai.
+     * 5. Ketika seluruh demand sudah terpenuhi, matriks solusi berisi jumlah distribusi yang optimal dari hasil metode least cost.
+     **/
     public function least_cost_solution($costs, $supply, $demand)
     {
-        // 2. Initialize the solution matrix to all zeros
+        // Inisialisasi semua sel ke nol mengunakan array
         $solution = array_fill(0, count($supply), array_fill(0, count($demand), 0));
-        // 3. Calculate the net supply and net demand at each location
+        // Hitung total supply dan total demand pada sel dalam tabel
         $netSupply = $supply;
         $netDemand = $demand;
-         // 4. While there is still unbalanced supply or demand
+         // Mencari apakah jumlah supply dan demand sama jumlahnya dengan mencari hasil akhirnya 0
         while (array_sum($netSupply) != 0 || array_sum($netDemand) != 0) {
-            // Find the location with the largest excess supply or demand (whichever is greater in magnitude)
+            // Temukan sel pada demand dengan jumlah terbesar atau jumlah supply yang masih lebih
             $maxExcess = max(array_merge([0], array_map(function ($x) {
                 return abs($x);
             }, array_merge($netSupply, $netDemand))));
@@ -32,7 +32,7 @@ class Least_cost
             
             
             if ($isSupply) {
-                // 4.1 Find the location with the smallest cost for shipping to a location with excess demand
+                // Temukan sel dengan biaya distribusi terkecil dengan demand yang belum teralokasi
                 $minCost = INF;
                 $minCostIndex = -1;
                 for ($i = 0; $i < count($demand); $i++) {
@@ -41,13 +41,13 @@ class Least_cost
                         $minCostIndex = $i;
                     }
                 }
-                // Ship the maximum amount possible from the excess supply location to the excess demand location
+                // Kirimkan jumlah maksimum supply dari sel yang memiliki supply lebih ke sel demand
                 $shippingAmount = min($maxExcess, $netDemand[$minCostIndex]);
                 $solution[$maxExcessIndex][$minCostIndex] += $shippingAmount;
                 $netSupply[$maxExcessIndex] -= $shippingAmount;
                 $netDemand[$minCostIndex] -= $shippingAmount;
             } else {
-                // 4.3 Find the location with the smallest cost for shipping from a location with excess supply
+                // Temukan sel dengan biaya distribusi terkecil dengan lebih banyak supply
                 $minCost = INF;
                 $minCostIndex = -1;
                 for ($i = 0; $i < count($supply); $i++) {
@@ -56,7 +56,7 @@ class Least_cost
                         $minCostIndex = $i;
                     }
                 }
-                // Ship the maximum amount possible from the excess supply location to the excess demand location
+                // Kirimkan jumlah maksimum supply dari sel yang memiliki supply lebih ke sel demand
                 $shippingAmount = min($maxExcess, $netSupply[$minCostIndex]);
                 $solution[$minCostIndex][$maxExcessIndex - count($supply)] += $shippingAmount;
                 $netSupply[$minCostIndex] -= $shippingAmount;
