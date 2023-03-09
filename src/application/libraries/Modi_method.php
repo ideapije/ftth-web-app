@@ -3,14 +3,24 @@
 class Modi_method
 {
     /**
-     * Langkah-langkah MODI berikut untuk menyelesaikan masalah transportasi: 
-     * 1. Mulailah dengan solusi awal yang layak untuk masalah transportasi. Ini dapat ditemukan menggunakan aturan sudut barat laut, metode biaya minimum, atau metode perkiraan Vogel.
-     * 2. Hitung "biaya peluang" untuk setiap variabel non-dasar (yaitu, setiap rute transportasi yang tidak digunakan). Ini dilakukan dengan menambahkan nilai penawaran dan permintaan untuk rute tersebut ke biaya transportasi untuk rute tersebut.
-     * 3. Temukan variabel non-dasar (rute transportasi yang tidak digunakan) dengan biaya peluang terkecil. Ini adalah rute yang akan digunakan untuk memodifikasi solusi awal.
-     * 4. Periksa apakah permintaan di tujuan rute yang dipilih lebih besar dari atau kurang dari pasokan di sumbernya.
-     *      4.1 Jika permintaan lebih besar dari penawaran, alokasikan pasokan penuh ke rute yang dipilih dan kurangi permintaan di tujuan yang sesuai.
-     *      4.2 Jika permintaan kurang dari penawaran, alokasikan permintaan penuh ke rute yang dipilih dan kurangi pasokan di sumber yang sesuai.
-     * 5. Ulangi proses ini sampai tidak ada perbaikan lebih lanjut yang dapat dilakukan. Pada titik ini, solusinya optimal.
+     * Berikut langkah-langkah penyelesaian optimalisasi dengan metode MODI : 
+     * 1. Langkah pertama adalah menghitung bilangan indeks, baik indeks baris (Si) maupun indeks kolom (Dj).
+     *    Ini dilaksanakan dengan menitik beratkan pada sel yang sudah terisi,  dimana berlaku rumus:
+     *      Ri + Kj = Cij
+     *    Dimana:
+     *      Cij = Biaya dari tiap sel (i, j) yang terisi
+     *      Ri  = Indeks baris
+     *      Kj  = Indeks kolom
+     *      tetapkan R1 = 0
+     * 2. Menghitung indeks yang ditingkatkan atau sel yang tidak terisi. Langkah ini dilakukan begitu harga baris dan 
+     *    kolom sudah dihitung menggunakan sel yang sudah terisi. Langkah ini dapat dilakukan dengan menggunakan rumus:
+     *    Iij = Cij - Ri - Kj
+     *    Dimana:
+     *      Iij = Indeks yang akan ditingkatkan untuk tiap sel yang belum terisi
+     *      Cij = Biaya pada baris ke i dan kolom ke j yang belum terisi
+     *      Ri  = Baris ke i
+     *      Kj  = Kolom ke j
+     * 3. Solusi optimal tercapai apabila hasil perhitungan indeks seluruhnya sudah positif.
      */
     public $bfs_copy = [];
 
