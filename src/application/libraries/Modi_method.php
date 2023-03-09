@@ -3,13 +3,13 @@
 class Modi_method
 {
     /**
-     * Langkah-langkah MODI berikut untuk menyelesaikan masalah transportasi : 
+     * Langkah-langkah MODI berikut untuk menyelesaikan masalah transportasi: 
      * 1. Mulailah dengan solusi awal yang layak untuk masalah transportasi. Ini dapat ditemukan menggunakan aturan sudut barat laut, metode biaya minimum, atau metode perkiraan Vogel.
      * 2. Hitung "biaya peluang" untuk setiap variabel non-dasar (yaitu, setiap rute transportasi yang tidak digunakan). Ini dilakukan dengan menambahkan nilai penawaran dan permintaan untuk rute tersebut ke biaya transportasi untuk rute tersebut.
      * 3. Temukan variabel non-dasar (rute transportasi yang tidak digunakan) dengan biaya peluang terkecil. Ini adalah rute yang akan digunakan untuk memodifikasi solusi awal.
      * 4. Periksa apakah permintaan di tujuan rute yang dipilih lebih besar dari atau kurang dari pasokan di sumbernya.
-     *    - Jika permintaan lebih besar dari penawaran, alokasikan pasokan penuh ke rute yang dipilih dan kurangi permintaan di tujuan yang sesuai.
-     *    - Jika permintaan kurang dari penawaran, alokasikan permintaan penuh ke rute yang dipilih dan kurangi pasokan di sumber yang sesuai.
+     *      4.1 Jika permintaan lebih besar dari penawaran, alokasikan pasokan penuh ke rute yang dipilih dan kurangi permintaan di tujuan yang sesuai.
+     *      4.2 Jika permintaan kurang dari penawaran, alokasikan permintaan penuh ke rute yang dipilih dan kurangi pasokan di sumber yang sesuai.
      * 5. Ulangi proses ini sampai tidak ada perbaikan lebih lanjut yang dapat dilakukan. Pada titik ini, solusinya optimal.
      */
     public $bfs_copy = [];
