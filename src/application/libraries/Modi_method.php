@@ -129,7 +129,6 @@ class Modi_method
 
         // 3. Solusi optimal tercapai apabila hasil perhitungan indeks seluruhnya sudah positif.
         while (true) {
-            // Find the non-basic variable with the smallest positive cost
             $min = INF;
             $k = 0;
             for ($j = $n + 1; $j <= $n + $m; $j++) {
