@@ -32,7 +32,6 @@ class Modi_method
         $u[$default] = 0;
         $this->bfs_copy = $bfs;
         $len_bfs_copy = count($this->bfs_copy);
-        // var_dump($len_bfs_copy);
         while ($len_bfs_copy > 0) {
             foreach ($this->bfs_copy as $index => $bv) {
                 $i = $bv[2][0];
@@ -82,14 +81,14 @@ class Modi_method
 
     public function modi_solution($costs, $supply, $demand)
     {
-        // 1. Initialize variables
+        // 1. Langkah pertama adalah menghitung bilangan indeks
         $n = count($costs);
         $m = count($costs[0]);
         $u = $v = array_fill(0, $n + $m + 1, 0);
         $pred = array_fill(0, $n + $m + 1, 0);
         $x = array_fill(0, $n + $m + 1, 0);
 
-        // 2. Initialize the supply and demand variables
+
         for ($i = 1; $i <= $n; $i++) {
             $u[$i] = $supply[$i - 1];
         }
@@ -97,7 +96,7 @@ class Modi_method
             $v[$j] = $demand[$j - $n - 1];
         }
 
-        // 3. Initialize the costs and pred arrays
+        // 2. Menghitung indeks yang ditingkatkan atau sel yang tidak terisi
         for ($i = 1; $i <= $n; $i++) {
             for ($j = $n + 1; $j <= $n + $m; $j++) {
                 $costs[$i][$j - $n - 1] += $u[$i] + $v[$j];
@@ -105,7 +104,6 @@ class Modi_method
             }
         }
 
-        // 4. Find the initial feasible solution
         $z = 0;
         for ($j = $n + 1; $j <= $n + $m; $j++) {
             $min = INF;
@@ -129,7 +127,7 @@ class Modi_method
             }
         }
 
-        // 5. Iteratively improve the solution
+        // 3. Solusi optimal tercapai apabila hasil perhitungan indeks seluruhnya sudah positif.
         while (true) {
             // Find the non-basic variable with the smallest positive cost
             $min = INF;
