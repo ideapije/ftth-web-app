@@ -7,11 +7,9 @@ class Least_cost
      * 1. Sel-sel matriks harus berisi biaya distribusi per core dari sumber yang sesuai menuju ke tujuan yang sesuai.
      * 2. Inisialisasi sel biaya distribusi ke semua nol. Matriks ini akan menyimpan jumlah distribusi akhir untuk setiap pasangan sumber ke tujuan.
      * 3. Hitung total supply dan total demand untuk memulai alokasi. Supply adalah jumlah total core yang tersedia di setiap sumber dan demand adalah jumlah total core yang dibutuhkan di setiap tujuan.
-     * 4. Mencari biaya terendah dari seluruh biaya distribusi yang ada. Jika terdapat jumlah dari setiap supply dan demand tidak seimbang, maka:
-     *  4.1 Temukan sel yang memiliki jumlah supply yang lebih banyak atau demand lebih banyak 
-     *  4.2 Jika supply lebih banyak, temukan sel dengan biaya distribusi terkecil ke tujuan yang demandnya belum terpenuhi.
-     *  4.3 Jika demand lebih besar, temukan sel dengan biaya distribusi terkecil dari sel dengan supply yang masih ada.
-     *  4.4 Kirim jumlah maksimum yang mungkin dari sel kelebihan supply ke lokasi demand berlebih, dan perbarui matriks solusi dan nilai penawaran dan permintaan bersih yang sesuai.
+     * 4. Periksa apakah permintaan di tujuan rute yang dipilih lebih besar dari atau kurang dari pasokan di sumbernya.
+     *    - Jika permintaan lebih besar dari penawaran, alokasikan pasokan penuh ke rute yang dipilih dan kurangi permintaan di tujuan yang sesuai.
+     *    - Jika permintaan kurang dari penawaran, alokasikan permintaan penuh ke rute yang dipilih dan kurangi pasokan di sumber yang sesuai.
      * 5. Ketika seluruh demand sudah terpenuhi, matriks solusi berisi jumlah distribusi yang optimal dari hasil metode least cost.
      **/
     public function least_cost_solution($costs, $supply, $demand)
