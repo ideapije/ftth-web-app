@@ -2,8 +2,8 @@
     <form action="<?= site_url("resolver/submit?sumber=$sumber&tujuan=$tujuan") ?>" method="post">
         <div class="jumbotron jumbotron-fluid mb-3">
             <div class="container">
-                <h3>Input ODC dan ODP</h3>
-                <p class="lead">Masukan biaya dari masing-masing ODP</p>
+                <h3>Input Sumber dan Tujuan</h3>
+                <p class="lead">Masukan biaya dari masing-masing Tujuan</p>
             </div>
         </div>
         <div class="table-responsive mb-3">
@@ -14,9 +14,9 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">ODC/ODP</th>
+                        <th scope="col">Sumber/Tujuan</th>
                         <?php for ($i = 1; $i <= $amount_demand; $i++): ?>
-                            <th scope="col">ODP
+                            <th scope="col">Tujuan
                                 <?= $i ?>
                             </th>
                         <?php endfor ?>
@@ -31,22 +31,22 @@
                 <tbody>
                     <?php for ($i = 0; $i < $amount_supply; $i++): ?>
                         <tr>
-                            <td>ODC
+                            <td>Sumber
                                 <?= $i + 1 ?>
                             </td>
                             <?php for ($j = 0; $j < $amount_demand; $j++): ?>
                                 <td>
-                                    <input type="text" name="costs[<?= $i ?>][<?= $j ?>]"
-                                        value="<?= $costs[$i][$j] ?? null ?>" />
+                                    <input type="text" name="costs[<?= $i ?>][<?= $j ?>]" value="<?= $costs[$i][$j] ?? null ?>" />
                                 </td>
                             <?php endfor ?>
                             <?php if ($supply > $demand): ?>
                                 <td style="background: azure;">
-                                    <input type="text" name="costs[<?= $i ?>][<?= $amount_demand ?>]" value="0" />
+                                    <input type="text" name="costs[<?= $i ?>][<?= $amount_demand ?>]" value="" />
                                 </td>
                             <?php endif ?>
                             <td>
-                                <input type="text" name="supply[]" value="<?= $supplies[$i] ?? 0 ?>" />
+                                <input type="hidden" name="supply[]" value="<?= $supplies[$i] ?? 0 ?>" />
+                                <?= $supplies[$i] ?? 0 ?>
                             </td>
                         </tr>
                     <?php endfor ?>
@@ -55,7 +55,7 @@
                             <td style="background: azure;"><strong>Dummy</strong></td>
                             <?php for ($d = 0; $d < $amount_demand; $d++): ?>
                                 <td style="background: azure;">
-                                    <input type="text" name="dummy[]" value="0" />
+                                    <input type="text" name="dummy[]" value="" />
                                 </td>
                             <?php endfor ?>
                             <td style="background: azure;">
@@ -71,7 +71,8 @@
                         </td>
                         <?php for ($k = 0; $k < $amount_demand; $k++): ?>
                             <td>
-                                <input type="text" name="demand[]" value="<?= $demands[$k] ?? null ?>" />
+                                <input type="hidden" name="demand[]" value="<?= $demands[$k] ?? null ?>" />
+                                <?= $demands[$k] ?? 0 ?>
                             </td>
                         <?php endfor ?>
                         <?php if ($supply > $demand): ?>
