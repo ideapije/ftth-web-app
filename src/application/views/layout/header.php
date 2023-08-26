@@ -36,6 +36,9 @@
                 margin-top: 8px;
             }
         }
+        .table.table-bordered input {
+            max-width: 100px;
+        }
     </style>
 </head>
 
