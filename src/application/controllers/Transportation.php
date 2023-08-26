@@ -13,10 +13,16 @@ class Transportation extends CI_Controller
 
     public function index()
     {
+        $this->config->load('app_seeders');
+        $supplies = $this->config->item('supplies');
+        $demands = $this->config->item('demands');
+
         $this->template->set_title('Model Transportasi');
         $this->template->set_menu('transportation');
         $data['sumber'] = 4;
         $data['tujuan'] = 4;
+        $data['supply_amount'] = array_sum($supplies);
+        $data['demand_amount'] = array_sum($demands);
         $this->template->view('transportation/index', $data);
     }
 
@@ -60,8 +66,10 @@ class Transportation extends CI_Controller
 
             $sumber = $this->input->get('sumber');
             $tujuan = $this->input->get('tujuan');
+            $supply = $this->input->get('supply');
+            $demand = $this->input->get('demand');
 
-            redirect("transportation/results?sumber=$sumber&tujuan=$tujuan");
+            redirect("transportation/results?sumber=$sumber&tujuan=$tujuan&supply=$supply&demand=$demand");
         } catch (\Exception $e) {
             $this->session->set_userdata('errors', [$e->getMessage()]);
             redirect('transportation/form', 'refresh');
