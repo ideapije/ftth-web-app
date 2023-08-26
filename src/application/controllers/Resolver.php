@@ -22,6 +22,8 @@ class Resolver extends CI_Controller
     {
         $data['sumber'] = $this->input->get('sumber');
         $data['tujuan'] = $this->input->get('tujuan');
+        $data['supply'] = $this->input->get('supply');
+        $data['demand'] = $this->input->get('demand');
         /**
          * Load Seeder
          */

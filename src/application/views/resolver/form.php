@@ -15,37 +15,75 @@
                 <thead>
                     <tr>
                         <th scope="col">ODC/ODP</th>
-                        <?php for ($i = 1; $i <= $amount_demand; $i++) : ?>
-                            <th scope="col">ODP <?= $i ?></th>
+                        <?php for ($i = 1; $i <= $amount_demand; $i++): ?>
+                            <th scope="col">ODP
+                                <?= $i ?>
+                            </th>
                         <?php endfor ?>
+                        <?php if ($supply > $demand): ?>
+                            <th scope="col" style="background: azure;">
+                                Dummy
+                            </th>
+                        <?php endif; ?>
                         <th scope="col">Kapasitas</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i = 0; $i < $amount_supply; $i++) : ?>
+                    <?php for ($i = 0; $i < $amount_supply; $i++): ?>
                         <tr>
-                            <td>ODC <?= $i + 1 ?></td>
-                            <?php for ($j = 0; $j < $amount_demand; $j++) : ?>
+                            <td>ODC
+                                <?= $i + 1 ?>
+                            </td>
+                            <?php for ($j = 0; $j < $amount_demand; $j++): ?>
                                 <td>
-                                    <input type="text" name="costs[<?= $i ?>][<?= $j ?>]" value="<?= $costs[$i][$j] ?? null ?>" />
+                                    <input type="text" name="costs[<?= $i ?>][<?= $j ?>]"
+                                        value="<?= $costs[$i][$j] ?? null ?>" />
                                 </td>
                             <?php endfor ?>
+                            <?php if ($supply > $demand): ?>
+                                <td style="background: azure;">
+                                    <input type="text" name="costs[<?= $i ?>][<?= $amount_demand ?>]" value="0" />
+                                </td>
+                            <?php endif ?>
                             <td>
                                 <input type="text" name="supply[]" value="<?= $supplies[$i] ?? 0 ?>" />
                             </td>
                         </tr>
                     <?php endfor ?>
+                    <?php if ($supply < $demand): ?>
+                        <tr>
+                            <td style="background: azure;"><strong>Dummy</strong></td>
+                            <?php for ($d = 0; $d < $amount_demand; $d++): ?>
+                                <td style="background: azure;">
+                                    <input type="text" name="dummy[]" value="0" />
+                                </td>
+                            <?php endfor ?>
+                            <td style="background: azure;">
+                                <strong>
+                                    <?= $demand - $supply ?>
+                                </strong>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                     <tr>
                         <td>
                             Demand
                         </td>
-                        <?php for ($k = 0; $k < $amount_demand; $k++) : ?>
+                        <?php for ($k = 0; $k < $amount_demand; $k++): ?>
                             <td>
                                 <input type="text" name="demand[]" value="<?= $demands[$k] ?? null ?>" />
                             </td>
                         <?php endfor ?>
+                        <?php if ($supply > $demand): ?>
+                            <td style="background: azure;">
+                                <strong>
+                                    <?= $supply - $demand ?>
+                                </strong>
+                            </td>
+                        <?php endif ?>
                         <td>
-                            <input type="text" name="total" value="<?= $total ?? null ?>" />
+                            <?= $demand ?> \
+                            <?= $supply ?>
                         </td>
                     </tr>
                 </tbody>
